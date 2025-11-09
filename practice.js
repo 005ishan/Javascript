@@ -68,4 +68,59 @@ console.log("Total score of passed students : "+ totalScore)
 
 
 
-//-----------------------------------------------Objects and Functions-------------------------------------------------------
+//-------------------------------------------------//Promise async/await and Future then/catch-----------------------------------------------------
+
+// //Write a JavaScript program using Promises:
+// Create a function processAfterDelay(ms, num) that:
+// Resolves after ms milliseconds if num is divisible by 3,
+// Rejects after ms milliseconds otherwise.
+// Call this function for (1000, 3), (1500, 4), (2000, 6), (2500, 7).
+// Run all of them in parallel using Promise.allSettled() and log all resolved and rejected values separately.
+// Then, run (1000, 3), (2000, 6), (2500, 9) sequentially (non-blocking chain using .then()), logging each result.
+
+// Function that returns a promise
+function processAfterDelay(ms, num) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (num % 3 === 0) {
+                resolve(`✅ Resolved: ${num} is divisible by 3 (after ${ms}ms)`);
+            } else {
+                reject(`❌ Rejected: ${num} is NOT divisible by 3 (after ${ms}ms)`);
+            }
+        }, ms);
+    });
+}
+
+// --- 1️⃣ Run all in PARALLEL ---
+const promises = [
+    processAfterDelay(1000, 3),
+    processAfterDelay(1500, 4),
+    processAfterDelay(2000, 6),
+    processAfterDelay(2500, 7)
+];
+
+Promise.allSettled(promises).then(results => {
+    const resolved = results.filter(r => r.status === "fulfilled").map(r => r.value);
+    const rejected = results.filter(r => r.status === "rejected").map(r => r.reason);
+
+    console.log("\n--- Parallel Execution ---");
+    console.log("✅ Resolved values:");
+    console.log(resolved);
+    console.log("❌ Rejected values:");
+    console.log(rejected);
+});
+
+// --- 2️⃣ Run sequentially using .then() chain ---
+console.log("\n--- Sequential Execution ---");
+
+processAfterDelay(1000, 3)
+    .then(res => {
+        console.log(res);
+        return processAfterDelay(2000, 6);
+    })
+    .then(res => {
+        console.log(res);
+        return processAfterDelay(2500, 9);
+    })
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
