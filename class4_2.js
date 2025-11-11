@@ -1,5 +1,5 @@
-//Promise async/await
-//Future then/catch
+    //Promise async/await
+    //Future then/catch
 
 // console.log(1)
 // setTimeout(() => console.log(2), 1000) //run after 1 sec
