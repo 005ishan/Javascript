@@ -37,7 +37,8 @@ const students = [
     {name: "Bob", score: 55, passed: false},
     {name: "Charlie", score: 90, passed: true},
     {name: "David", score: 65, passed: true},
-    {name: "Eve", score: 40, passed: false}
+    {name: "Eve", score: 40, passed: false},
+    {name: "Ice", score: 40, passed: false}
 ]
 
 const passedStudents = students.filter(student => student.passed==true)
