@@ -104,13 +104,12 @@ var age1= 18
 var canVote = (age1 >=18) ? "Yes, can vote" : "No, cannot vote"
 console.log(canVote)
 
-if(ture){
+if(true){
     console.log("This is true");
 }
-
 if(false){
     console.log("if");
-}else if(i==1){
+}else if(1==1){
     console.log("else if");
 }else{
     console.log("else");
