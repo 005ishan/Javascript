@@ -1,7 +1,17 @@
 // const express = require('express'); //commonjs import, synchronus
 import express from 'express'; //ES module import, asynchronus
+import bodyParser from 'body-parser';
+import productRouter from './productRouter.js';
+import customerRouter from './customerRouter.js';
 
 const app = express();
+//get client data in request.body
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
+app.use('/api/products', productRouter); //implement
+app.use('/api/v1/customers', customerRouter); //implement
+
 const port = 3000;
 
 app.get('/', (req, res) => {
